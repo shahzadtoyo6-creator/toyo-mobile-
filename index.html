@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Toyo Mobile | Pakistan</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#100d15;color:#fff;font-family:Arial,sans-serif}
+header{padding:20px;text-align:center;background:#21162b;border-bottom:2px solid #c99aff}
+header h1{margin:0;color:#d9adff;letter-spacing:3px}
+header p{font-size:11px;color:#c6b5d1}
+.search{display:block;width:90%;padding:14px;margin:20px auto;background:#251d30;color:white;border:1px solid #b98be5;border-radius:12px;font-size:16px}
+h2{padding:0 16px;color:#e2c5ff}
+.note{padding:0 16px;color:#b7a9c2;font-size:13px}
+.lanes{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px;height:470px;overflow:hidden}
+.lane{height:100%;overflow:hidden;border:1px solid #ffffff20;border-radius:14px;background:#191420}
+.track{display:flex;flex-direction:column;gap:10px;padding:8px}
+.up{animation:up 24s linear infinite}
+.down{animation:down 28s linear infinite}
+.lane:hover .track{animation-play-state:paused}
+@keyframes up{to{transform:translateY(-50%)}}
+@keyframes down{from{transform:translateY(-50%)}to{transform:translateY(0)}}
+.phone{min-height:150px;padding:10px 5px;text-align:center;background:#2a2035;border:1px solid #ffffff14;border-radius:12px;cursor:pointer}
+.pic{height:72px;width:37px;margin:0 auto 8px;border:2px solid #d9c5e9;border-radius:8px;background:linear-gradient(140deg,#e6b5ff,#75479a,#17111f);position:relative}
+.pic:before{content:"";position:absolute;top:3px;left:10px;width:12px;height:3px;border-radius:5px;background:#111}
+.brand{font-size:10px;color:#e7baff;font-weight:bold;letter-spacing:1px}
+.name{font-size:12px;margin:7px 0}
+.price{font-size:11px;color:#b6e8c7;font-weight:bold}
+.catalog{padding:10px}
+#products{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px}
+footer{text-align:center;padding:25px;color:#a99ab6;font-size:12px}
+</style>
+</head>
+<body>
+<header>
+<h1>TOYO MOBILE</h1>
+<p>SMART CHOICE · SMART PRICE</p>
+</header>
+
+<input id="search" class="search" placeholder="Search mobile or brand..." oninput="render()">
+
+<h2>Explore Mobile Brands</h2>
+<p class="note">Phones move in opposite directions. Tap a phone for details.</p>
+
+<div class="lanes">
+<div class="lane"><div class="track up" id="right"></div></div>
+<div class="lane"><div class="track down" id="left"></div></div>
+</div>
+
+<section class="catalog">
+<h2>Popular Mobiles</h2>
+<div id="products"></div>
+</section>
+
+<footer>© TOYO MOBILE · Pakistan</footer>
+
+<script>
+const phones=[
+{brand:"INFINIX",name:"Infinix Note 50",price:54999,ram:"8GB RAM",camera:"50MP camera"},
+{brand:"OPPO",name:"OPPO A5 Pro",price:49999,ram:"8GB RAM",camera:"50MP camera"},
+{brand:"SAMSUNG",name:"Samsung Galaxy A16",price:49999,ram:"6GB RAM",camera:"50MP camera"},
+{brand:"VIVO",name:"Vivo Y29",price:59999,ram:"8GB RAM",camera:"50MP camera"},
+{brand:"TECNO",name:"Tecno Spark 30",price:32999,ram:"8GB RAM",camera:"64MP camera"},
+{brand:"REALME",name:"Realme C75",price:44999,ram:"8GB RAM",camera:"50MP camera"},
+{brand:"XIAOMI",name:"Redmi Note 14",price:54999,ram:"8GB RAM",camera:"108MP camera"},
+{brand:"INFINIX",name:"Infinix Hot 50",price:34999,ram:"8GB RAM",camera:"50MP camera"}
+];
+function money(n){return "Rs. "+n.toLocaleString("en-PK")+" PKR"}
+function card(p){return `<div class="phone" onclick="details('${p.name}')"><div class="pic"></div><div class="brand">${p.brand}</div><div class="name">${p.name}</div><div class="price">${money(p.price)}</div></div>`}
+function setupLanes(){
+let a=phones.filter((p,i)=>i%2===0);
+let b=phones.filter((p,i)=>i%2!==0).reverse();
+document.getElementById("right").innerHTML=[...a,...a].map(card).join("");
+document.getElementById("left").innerHTML=[...b,...b].map(card).join("");
+}
+function render(){
+let q=document.getElementById("search").value.toLowerCase();
+let found=phones.filter(p=>(p.name+" "+p.brand).toLowerCase().includes(q));
+document.getElementById("products").innerHTML=found.map(card).join("");
+}
+function details(name){
+let p=phones.find(x=>x.name===name);
+alert(p.name+"\nPrice: "+money(p.price)+"\n"+p.ram+"\n"+p.camera+"\n\nDemo details: verify current price before buying.");
+}
+setupLanes();render();
+</script>
+</body>
+</html>
