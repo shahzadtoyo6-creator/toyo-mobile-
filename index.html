@@ -2,201 +2,480 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Toyo Mobile | Pakistan</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#100b20">
+<meta name="description" content="TOYO MOBILE - Mobile prices, specifications, camera, battery and phone comparisons in Pakistan.">
+<title>TOYO MOBILE | Phone Prices & Specs Pakistan</title>
+
 <style>
+:root{
+  --bg:#0c0916;
+  --panel:#171126;
+  --panel2:#211735;
+  --purple:#9d65ff;
+  --pink:#ed65cf;
+  --text:#f7f3ff;
+  --muted:#b9aecb;
+  --border:#35264c;
+}
 *{box-sizing:border-box}
-body{margin:0;background:#100d15;color:#fff;font-family:Arial,sans-serif}
-header{padding:20px;text-align:center;background:#21162b;border-bottom:2px solid #c99aff}
-header h1{margin:0;color:#d9adff;letter-spacing:3px}
-header p{font-size:11px;color:#c6b5d1}
-.search{display:block;width:90%;padding:14px;margin:20px auto;background:#251d30;color:white;border:1px solid #b98be5;border-radius:12px;font-size:16px}
-h2{padding:0 16px;color:#e2c5ff}
-.note{padding:0 16px;color:#b7a9c2;font-size:13px}
-.lanes{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px;height:470px;overflow:hidden}
-.lane{height:100%;overflow:hidden;border:1px solid #ffffff20;border-radius:14px;background:#191420}
-.track{display:flex;flex-direction:column;gap:10px;padding:8px}
-.up{animation:up 24s linear infinite}
-.down{animation:down 28s linear infinite}
-.lane:hover .track{animation-play-state:paused}
-@keyframes up{to{transform:translateY(-50%)}}
-@keyframes down{from{transform:translateY(-50%)}to{transform:translateY(0)}}
-.phone{min-height:150px;padding:10px 5px;text-align:center;background:#2a2035;border:1px solid #ffffff14;border-radius:12px;cursor:pointer}
-.pic{height:72px;width:37px;margin:0 auto 8px;border:2px solid #d9c5e9;border-radius:8px;background:linear-gradient(140deg,#e6b5ff,#75479a,#17111f);position:relative}
-.pic:before{content:"";position:absolute;top:3px;left:10px;width:12px;height:3px;border-radius:5px;background:#111}
-.brand{font-size:10px;color:#e7baff;font-weight:bold;letter-spacing:1px}
-.name{font-size:12px;margin:7px 0}
-.price{font-size:11px;color:#b6e8c7;font-weight:bold}
-.catalog{padding:10px}
-#products{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px}
-footer{text-align:center;padding:25px;color:#a99ab6;font-size:12px}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:Arial,Helvetica,sans-serif;
+}
+header{
+  padding:22px 16px 18px;text-align:center;
+  background:linear-gradient(135deg,#20113c,#35154b,#111020);
+  border-bottom:1px solid var(--border);
+}
+.logo{font-size:30px;font-weight:900;letter-spacing:2px}
+.logo span{color:#c39aff}
+header p{color:var(--muted);margin:9px 0 0;font-size:14px}
+nav{
+  display:flex;justify-content:center;gap:18px;flex-wrap:wrap;
+  padding:13px;background:#120e1d;border-bottom:1px solid var(--border)
+}
+nav a{color:#e4d3ff;text-decoration:none;font-size:14px}
+nav a:hover{color:#fff}
+.container{width:min(1150px,94%);margin:auto}
+.hero{
+  margin:22px 0;padding:27px 20px;border-radius:18px;
+  background:linear-gradient(125deg,#271341,#171126 65%,#32133b);
+  border:1px solid #4b2b69;
+}
+.hero h1{font-size:clamp(25px,5vw,40px);margin:0 0 12px}
+.hero p{color:var(--muted);line-height:1.6;margin:0 0 17px}
+.pill{
+  display:inline-block;background:#35204d;color:#e5d1ff;
+  border:1px solid #593879;border-radius:30px;
+  padding:7px 11px;font-size:12px;margin:3px
+}
+.search-area{
+  display:grid;grid-template-columns:2fr 1fr 1fr;
+  gap:10px;margin:22px 0
+}
+input,select{
+  width:100%;padding:13px;border-radius:10px;
+  border:1px solid var(--border);background:#171126;
+  color:white;font-size:14px;outline:none
+}
+input:focus,select:focus{border-color:var(--purple)}
+.section-title{
+  display:flex;justify-content:space-between;align-items:center;
+  gap:10px;flex-wrap:wrap;margin:27px 0 15px
+}
+.section-title h2{font-size:22px;margin:0}
+.muted{color:var(--muted);font-size:13px}
+.grid{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px
+}
+.card{
+  background:var(--panel);border:1px solid var(--border);
+  border-radius:15px;overflow:hidden;transition:.2s;cursor:pointer;
+}
+.card:hover{transform:translateY(-4px);border-color:var(--purple)}
+.phone-art{
+  height:180px;display:flex;align-items:center;justify-content:center;
+  gap:15px;position:relative;overflow:hidden;
+  background:radial-gradient(ellipse,#38234f,#171126 70%);
+}
+.phone{
+  height:125px;width:61px;border:3px solid #aaa;
+  border-radius:12px;position:relative;
+  background:linear-gradient(145deg,#252b40,#080910);
+  box-shadow:0 8px 25px #0009;
+}
+.phone.back{background:linear-gradient(145deg,var(--phone-color,#5946a8),#11111c)}
+.phone:before{
+  content:"";position:absolute;top:5px;left:50%;transform:translateX(-50%);
+  width:19px;height:5px;background:#08080d;border-radius:9px
+}
+.phone.back:before{
+  content:"";position:absolute;top:8px;left:7px;transform:none;
+  width:20px;height:25px;border-radius:6px;background:#111;
+  border:1px solid #888
+}
+.phone.back:after{
+  content:"";position:absolute;top:12px;left:11px;
+  width:5px;height:5px;background:#8e9cff;border-radius:50%;
+  box-shadow:9px 0 #8e9cff,0 9px #8e9cff
+}
+.phone.front:after{
+  content:"";position:absolute;inset:14px 4px 5px;
+  background:linear-gradient(150deg,#9d65ff,#17112c 50%,#ef75d7);
+  border-radius:5px
+}
+.card-body{padding:13px}
+.card h3{font-size:16px;margin:0 0 8px;line-height:1.4}
+.price{font-size:20px;font-weight:800;color:#d2b0ff;margin:8px 0}
+.spec-line{color:var(--muted);font-size:12px;line-height:1.8}
+.view-btn,.primary-btn{
+  width:100%;padding:11px;border:0;border-radius:9px;
+  background:linear-gradient(100deg,#8b52e8,#bd57d4);
+  color:white;font-weight:bold;margin-top:12px;cursor:pointer
+}
+.view-btn:hover,.primary-btn:hover{filter:brightness(1.13)}
+.no-results{
+  display:none;padding:25px;text-align:center;color:var(--muted);
+  background:var(--panel);border-radius:12px
+}
+.compare-box{
+  margin:28px 0;padding:18px;background:var(--panel);
+  border:1px solid var(--border);border-radius:15px
+}
+.compare-box select{margin:6px 0 10px}
+.compare-result{line-height:1.9;color:var(--muted);font-size:14px}
+.modal{
+  display:none;position:fixed;inset:0;z-index:10;
+  background:#05030ceF;overflow-y:auto;padding:16px
+}
+.modal-content{
+  max-width:780px;margin:18px auto;background:var(--panel);
+  border:1px solid #533772;border-radius:18px;overflow:hidden
+}
+.modal-head{
+  padding:18px;display:flex;justify-content:space-between;
+  gap:10px;align-items:center;background:#211432
+}
+.modal-head h2{font-size:21px;margin:0}
+.close-btn{
+  border:0;border-radius:8px;background:#40254f;color:white;
+  font-size:23px;padding:4px 12px;cursor:pointer
+}
+.detail-art{height:210px}
+.detail-art .phone{height:150px;width:75px}
+.detail-art .phone.front:after{inset:17px 5px 6px}
+.detail-body{padding:18px}
+.detail-price{font-size:26px;color:#d2b0ff;font-weight:bold;margin:10px 0}
+.notice{
+  background:#261c35;border:1px solid #4a345f;border-radius:10px;
+  padding:12px;color:#d8c9e9;font-size:12px;line-height:1.6;margin-top:15px
+}
+.spec-table{width:100%;border-collapse:collapse;margin-top:15px}
+.spec-table td{padding:11px 8px;border-bottom:1px solid var(--border);font-size:13px;vertical-align:top}
+.spec-table td:first-child{width:38%;color:#c7afd9}
+footer{
+  text-align:center;margin-top:35px;padding:25px 12px;
+  border-top:1px solid var(--border);color:var(--muted);font-size:13px;line-height:1.8
+}
+footer strong{color:#d2b0ff}
+@media(max-width:850px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:600px){
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .search-area{grid-template-columns:1fr}
+  .logo{font-size:26px}
+  .phone-art{height:145px;gap:10px}
+  .phone{height:108px;width:52px}
+  .card-body{padding:10px}
+  .card h3{font-size:14px}
+  .price{font-size:17px}
+  .detail-art{height:175px}
+  .spec-table td{font-size:12px}
+}
 </style>
 </head>
+
 <body>
 <header>
-<h1>TOYO MOBILE</h1>
-<p>SMART CHOICE · SMART PRICE</p>
+  <div class="logo">TOYO <span>MOBILE</span></div>
+  <p>Pakistan Mobile Prices · Full Specifications · Smart Choices</p>
 </header>
 
-<input id="search" class="search" placeholder="Search mobile or brand..." oninput="render()">
+<nav>
+  <a href="#home">Home</a>
+  <a href="#mobiles">Mobile Phones</a>
+  <a href="#compare">Compare Phones</a>
+  <a href="#about">About Us</a>
+</nav>
 
-<h2>Explore Mobile Brands</h2>
-<p class="note">Phones move in opposite directions. Tap a phone for details.</p>
+<main class="container" id="home">
+  <section class="hero">
+    <span class="pill">YOUR MOBILE GUIDE</span>
+    <h1>Find Your Next Smartphone</h1>
+    <p>Compare mobile prices, RAM, storage, camera, display, battery and processor. Choose your next phone with confidence.</p>
+    <a href="#mobiles"><button class="primary-btn" style="max-width:190px">Explore Mobiles ↓</button></a>
+  </section>
 
-<div class="lanes">
-<div class="lane"><div class="track up" id="right"></div></div>
-<div class="lane"><div class="track down" id="left"></div></div>
-</div>
+  <section class="search-area" aria-label="Mobile filters">
+    <input id="search" type="search" placeholder="Search mobile name or brand...">
+    <select id="brand">
+      <option value="">All Brands</option>
+      <option>Infinix</option>
+      <option>OPPO</option>
+      <option>Samsung</option>
+      <option>Vivo</option>
+      <option>Tecno</option>
+      <option>Realme</option>
+      <option>Redmi</option>
+    </select>
+    <select id="budget">
+      <option value="">Any Budget</option>
+      <option value="30000">Under Rs. 30,000</option>
+      <option value="40000">Under Rs. 40,000</option>
+      <option value="50000">Under Rs. 50,000</option>
+      <option value="60000">Under Rs. 60,000</option>
+      <option value="80000">Under Rs. 80,000</option>
+    </select>
+  </section>
 
-<section class="catalog">
-<h2>Popular Mobiles</h2>
-<div id="products"></div>
-</section>
-
-<footer>© TOYO MOBILE · Pakistan</footer>
-
-<script>
-const phones=[
-{brand:"INFINIX",name:"Infinix Note 50",price:54999,ram:"8GB RAM",camera:"50MP camera"},
-{brand:"OPPO",name:"OPPO A5 Pro",price:49999,ram:"8GB RAM",camera:"50MP camera"},
-{brand:"SAMSUNG",name:"Samsung Galaxy A16",price:49999,ram:"6GB RAM",camera:"50MP camera"},
-{brand:"VIVO",name:"Vivo Y29",price:59999,ram:"8GB RAM",camera:"50MP camera"},
-{brand:"TECNO",name:"Tecno Spark 30",price:32999,ram:"8GB RAM",camera:"64MP camera"},
-{brand:"REALME",name:"Realme C75",price:44999,ram:"8GB RAM",camera:"50MP camera"},
-{brand:"XIAOMI",name:"Redmi Note 14",price:54999,ram:"8GB RAM",camera:"108MP camera"},
-{brand:"INFINIX",name:"Infinix Hot 50",price:34999,ram:"8GB RAM",camera:"50MP camera"}
-];
-function money(n){return "Rs. "+n.toLocaleString("en-PK")+" PKR"}
-function card(p){return `<div class="phone" onclick="details('${p.name}')"><div class="pic"></div><div class="brand">${p.brand}</div><div class="name">${p.name}</div><div class="price">${money(p.price)}</div></div>`}
-function setupLanes(){
-let a=phones.filter((p,i)=>i%2===0);
-let b=phones.filter((p,i)=>i%2!==0).reverse();
-document.getElementById("right").innerHTML=[...a,...a].map(card).join("");
-document.getElementById("left").innerHTML=[...b,...b].map(card).join("");
-}
-function render(){
-let q=document.getElementById("search").value.toLowerCase();
-let found=phones.filter(p=>(p.name+" "+p.brand).toLowerCase().includes(q));
-document.getElementById("products").innerHTML=found.map(card).join("");
-}
-function details(name){
-let p=phones.find(x=>x.name===name);
-alert(p.name+"\nPrice: "+money(p.price)+"\n"+p.ram+"\n"+p.camera+"\n\nDemo details: verify current price before buying.");
-}
-setupLanes();render();
-</script>
-  
-<style>
-.mobile-details {
-  display:none;
-  position:fixed;
-  inset:0;
-  z-index:9999;
-  overflow-y:auto;
-  background:#100d15;
-  color:#fff;
-  padding:18px;
-  font-family:Arial,sans-serif;
-}
-.mobile-details h2 {color:#e0baff}
-.mobile-details .close {
-  background:#362343;color:white;border:0;
-  border-radius:8px;padding:12px 18px;
-  font-size:16px;margin-bottom:15px;
-}
-.phone-photos {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-}
-.phone-photos img {
-  width:100%;
-  aspect-ratio:3/5;
-  object-fit:contain;
-  background:#21182a;
-  border-radius:12px;
-}
-.specs {
-  width:100%;
-  border-collapse:collapse;
-  margin-top:15px;
-}
-.specs td {
-  padding:12px 8px;
-  border-bottom:1px solid #45344f;
-  overflow-wrap:anywhere;
-}
-.specs td:first-child {color:#d4a8fa}
-</style>
-
-<div id="mobileDetails" class="mobile-details">
-  <button class="close" onclick="closeMobileDetails()">← Back to phones</button>
-  <h2 id="detailName">Mobile name</h2>
-  <h3 id="detailPrice"></h3>
-
-  <div class="phone-photos">
-    <div>
-      <img id="frontPhoto" alt="Phone front view">
-      <p>Front View</p>
+  <section id="mobiles">
+    <div class="section-title">
+      <h2>Popular Mobile Phones</h2>
+      <span class="muted" id="count"></span>
     </div>
-    <div>
-      <img id="backPhoto" alt="Phone back view">
-      <p>Back View</p>
+    <div class="grid" id="phoneGrid"></div>
+    <div class="no-results" id="noResults">No mobile found. Try another search.</div>
+  </section>
+
+  <section class="compare-box" id="compare">
+    <div class="section-title"><h2>Compare Two Mobiles</h2></div>
+    <p class="muted">Select two phones to compare their prices and main specifications.</p>
+    <label for="compare1">First mobile</label>
+    <select id="compare1"></select>
+    <label for="compare2">Second mobile</label>
+    <select id="compare2"></select>
+    <button class="primary-btn" onclick="comparePhones()">Compare Now</button>
+    <div class="compare-result" id="compareResult"></div>
+  </section>
+
+  <section id="about">
+    <div class="section-title"><h2>About TOYO MOBILE</h2></div>
+    <p class="muted" style="line-height:1.9">
+      TOYO MOBILE helps visitors explore smartphone prices and specifications
+      in Pakistan. Compare features before deciding which phone suits your needs.
+      Prices may change by shop, city, variant and warranty.
+    </p>
+  </section>
+</main>
+
+<footer>
+  <strong>TOYO MOBILE</strong><br>
+  Your guide to mobile prices and specifications in Pakistan.<br>
+  Prices are estimates and should be confirmed with the seller.<br>
+  © <span id="year"></span> TOYO MOBILE
+</footer>
+
+<div class="modal" id="detailsModal" onclick="outsideClose(event)">
+  <div class="modal-content">
+    <div class="modal-head">
+      <h2 id="detailName">Mobile Details</h2>
+      <button class="close-btn" onclick="closeDetails()" aria-label="Close">×</button>
+    </div>
+    <div class="phone-art detail-art" id="detailArt"></div>
+    <div class="detail-body">
+      <div class="detail-price" id="detailPrice"></div>
+      <span class="pill" id="detailBrand"></span>
+      <table class="spec-table" id="specTable"></table>
+      <div class="notice">
+        Price and specifications are provided as a guide and may vary by
+        storage variant, region and seller. Confirm the exact model and
+        official warranty before buying. Phone illustrations on this demo
+        are generic designs, not official product photographs.
+      </div>
     </div>
   </div>
-
-  <h2>Full Specifications</h2>
-  <table class="specs" id="detailSpecs"></table>
-  <p style="color:#c8b9d3;font-size:12px">
-    Prices and specifications may vary by variant and retailer.
-  </p>
 </div>
 
 <script>
-const toyoPhoneDetails = {
-  "Infinix Note 50": {
-    price: "Verify current Pakistan price",
-    front: "https://placehold.co/400x650/241832/ffffff?text=Front+Photo",
-    back: "https://placehold.co/400x650/241832/ffffff?text=Back+Photo",
-    specs: {
-      "Brand": "Infinix",
-      "Display": "Check exact variant",
-      "RAM": "Check variant",
-      "Storage": "Check variant",
-      "Processor": "Verify official specification",
-      "Rear Camera": "Verify official specification",
-      "Front Camera": "Verify official specification",
-      "Battery": "Verify official specification",
-      "Charging": "Verify official specification",
-      "Network": "Verify regional variant",
-      "Operating System": "Verify current version"
-    }
-  }
-};
+const phones = [
+ {
+  id:1,name:"Infinix Note 50",brand:"Infinix",price:74999,
+  ram:"8GB",storage:"256GB",display:'6.78-inch AMOLED, 144Hz',
+  processor:"MediaTek Helio G100 Ultimate",rear:"50MP OIS + 2MP",
+  selfie:"13MP",battery:"5200mAh, 45W wired charging",
+  os:"Android 15, XOS 15",network:"4G LTE",
+  weight:"199g",protection:"IP64 dust and splash resistance",
+  colors:"Titanium Grey, Ruby Red and other colours",
+  verdict:"Good display, camera stabilisation and fast charging."
+ },
+ {
+  id:2,name:"OPPO A5 Pro",brand:"OPPO",price:54999,
+  ram:"8GB",storage:"128GB (variant dependent)",
+  display:"6.67-inch LCD, 90Hz",
+  processor:"Snapdragon 6s 4G Gen 1",
+  rear:"50MP + 2MP",selfie:"8MP",
+  battery:"5800mAh, 45W charging",
+  os:"ColorOS 15 (Android version varies by market)",
+  network:"4G LTE",weight:"Variant dependent",
+  protection:"Check exact regional model",
+  colors:"Varies by market",
+  verdict:"Large battery and everyday-use features."
+ },
+ {
+  id:3,name:"Samsung Galaxy A16",brand:"Samsung",price:54999,
+  ram:"6GB (variant dependent)",storage:"128GB (variant dependent)",
+  display:"6.7-inch Super AMOLED, FHD+",
+  processor:"Octa-core; chipset depends on region",
+  rear:"50MP + 5MP + 2MP",selfie:"13MP",
+  battery:"5000mAh",os:"Android with One UI",
+  network:"4G or 5G depending on model",
+  weight:"About 200g",protection:"Check exact variant",
+  colors:"Varies by market",
+  verdict:"AMOLED display and Samsung software experience."
+ },
+ {
+  id:4,name:"Vivo Y29",brand:"Vivo",price:49999,
+  ram:"8GB (variant dependent)",storage:"128GB (variant dependent)",
+  display:"Large display; exact version varies",
+  processor:"Check regional variant",
+  rear:"Main camera specification varies by model",
+  selfie:"Check exact variant",
+  battery:"Large-capacity battery; verify version",
+  os:"Funtouch OS",network:"4G/5G depends on version",
+  weight:"Variant dependent",protection:"Verify with seller",
+  colors:"Varies by market",
+  verdict:"Check exact model number before purchase."
+ },
+ {
+  id:5,name:"Tecno Spark 30",brand:"Tecno",price:39999,
+  ram:"8GB (variant dependent)",storage:"128GB (variant dependent)",
+  display:"6.78-inch FHD+ display, 90Hz",
+  processor:"MediaTek Helio G91 (Spark 30 4G)",
+  rear:"64MP (Spark 30 4G)",selfie:"13MP (variant dependent)",
+  battery:"5000mAh, 18W charging",
+  os:"Android 14, HiOS (model dependent)",
+  network:"4G LTE",weight:"Variant dependent",
+  protection:"Verify exact model",colors:"Varies by market",
+  verdict:"Large display and a high-resolution main camera."
+ },
+ {
+  id:6,name:"Realme C75",brand:"Realme",price:46999,
+  ram:"8GB (variant dependent)",storage:"128GB or 256GB",
+  display:"6.72-inch FHD+ LCD, 90Hz",
+  processor:"MediaTek Helio G92 Max (4G model)",
+  rear:"50MP main camera",selfie:"8MP (variant dependent)",
+  battery:"6000mAh, 45W charging (4G model)",
+  os:"Android 14, realme UI",
+  network:"4G LTE (model dependent)",
+  weight:"Variant dependent",protection:"Check exact model rating",
+  colors:"Varies by market",
+  verdict:"Large battery and fast charging on the 4G model."
+ },
+ {
+  id:7,name:"Redmi Note 14",brand:"Redmi",price:57999,
+  ram:"6GB (variant dependent)",storage:"128GB or 256GB",
+  display:"6.67-inch AMOLED, 120Hz (4G model)",
+  processor:"MediaTek Helio G99-Ultra (4G model)",
+  rear:"108MP main camera (4G model)",selfie:"20MP (4G model)",
+  battery:"5500mAh, charging varies by version",
+  os:"Xiaomi HyperOS",network:"4G/5G depends on model",
+  weight:"Variant dependent",protection:"Check exact model",
+  colors:"Varies by market",
+  verdict:"AMOLED screen and high-resolution main camera."
+ },
+ {
+  id:8,name:"Infinix Hot 50",brand:"Infinix",price:39999,
+  ram:"8GB (variant dependent)",storage:"128GB (variant dependent)",
+  display:"6.78-inch FHD+ LCD, 120Hz (4G model)",
+  processor:"MediaTek Helio G100 (4G model)",
+  rear:"50MP main camera",selfie:"8MP (variant dependent)",
+  battery:"5000mAh, charging speed varies",
+  os:"Android 14, XOS",
+  network:"4G LTE (model dependent)",
+  weight:"Variant dependent",protection:"Verify exact model",
+  colors:"Varies by market",
+  verdict:"Large, smooth display for everyday use."
+ }
+];
 
-function openMobileDetails(name) {
-  const p = toyoPhoneDetails[name];
-  if (!p) {
-    alert("Details abhi add nahi huin: " + name);
-    return;
-  }
+const phoneGrid = document.getElementById("phoneGrid");
+const searchInput = document.getElementById("search");
+const brandSelect = document.getElementById("brand");
+const budgetSelect = document.getElementById("budget");
 
-  document.getElementById("detailName").textContent = name;
-  document.getElementById("detailPrice").textContent = p.price;
-  document.getElementById("frontPhoto").src = p.front;
-  document.getElementById("backPhoto").src = p.back;
-
-  document.getElementById("detailSpecs").innerHTML =
-    Object.entries(p.specs).map(([k,v]) =>
-      `<tr><td>${k}</td><td>${v}</td></tr>`
-    ).join("");
-
-  document.getElementById("mobileDetails").style.display = "block";
+function money(n){
+ return "Rs. " + Number(n).toLocaleString("en-PK");
 }
-
-function closeMobileDetails() {
-  document.getElementById("mobileDetails").style.display = "none";
+function phoneArt(p,extraClass=""){
+ const colors={
+  Infinix:"#6050a6",OPPO:"#397e72",Samsung:"#536b9e",
+  Vivo:"#277f98",Tecno:"#a26a39",Realme:"#a34d65",Redmi:"#a44c4c"
+ };
+ return `
+ <div class="phone-art ${extraClass}" style="--phone-color:${colors[p.brand]||'#5946a8'}">
+  <div class="phone back"></div>
+  <div class="phone front"></div>
+ </div>`;
 }
+function renderPhones(){
+ const q=searchInput.value.trim().toLowerCase();
+ const brand=brandSelect.value;
+ const budget=Number(budgetSelect.value)||Infinity;
+ const filtered=phones.filter(p=>
+  (p.name.toLowerCase().includes(q)||p.brand.toLowerCase().includes(q)) &&
+  (!brand||p.brand===brand) && p.price<budget
+ );
+ document.getElementById("count").textContent=filtered.length+" phones";
+ document.getElementById("noResults").style.display=filtered.length?"none":"block";
+ phoneGrid.innerHTML=filtered.map(p=>`
+  <article class="card" onclick="showDetails(${p.id})" tabindex="0"
+    onkeydown="if(event.key==='Enter')showDetails(${p.id})">
+   ${phoneArt(p)}
+   <div class="card-body">
+    <h3>${p.name}</h3>
+    <div class="muted">${p.brand}</div>
+    <div class="price">${money(p.price)}</div>
+    <div class="spec-line">${p.ram} RAM · ${p.storage}<br>${p.battery}</div>
+    <button class="view-btn" onclick="event.stopPropagation();showDetails(${p.id})">View Full Details</button>
+   </div>
+  </article>
+ `).join("");
+}
+function showDetails(id){
+ const p=phones.find(x=>x.id===id);
+ if(!p)return;
+ document.getElementById("detailName").textContent=p.name;
+ document.getElementById("detailPrice").textContent=money(p.price);
+ document.getElementById("detailBrand").textContent=p.brand;
+ document.getElementById("detailArt").innerHTML=phoneArt(p).replace('class="phone-art "','class="phone-art detail-art"');
+ const rows=[
+  ["Brand",p.brand],["Estimated price",money(p.price)],
+  ["RAM",p.ram],["Storage",p.storage],["Display",p.display],
+  ["Processor",p.processor],["Rear camera",p.rear],
+  ["Front camera",p.selfie],["Battery / charging",p.battery],
+  ["Operating system",p.os],["Network",p.network],
+  ["Weight",p.weight],["Protection",p.protection],
+  ["Available colours",p.colors],["Quick overview",p.verdict]
+ ];
+ document.getElementById("specTable").innerHTML=rows.map(r=>
+  `<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`
+ ).join("");
+ document.getElementById("detailsModal").style.display="block";
+ document.body.style.overflow="hidden";
+}
+function closeDetails(){
+ document.getElementById("detailsModal").style.display="none";
+ document.body.style.overflow="";
+}
+function outsideClose(e){
+ if(e.target.id==="detailsModal")closeDetails();
+}
+document.addEventListener("keydown",e=>{
+ if(e.key==="Escape")closeDetails();
+});
+function setupCompare(){
+ const options=phones.map(p=>`<option value="${p.id}">${p.name}</option>`).join("");
+ document.getElementById("compare1").innerHTML=options;
+ document.getElementById("compare2").innerHTML=options;
+ document.getElementById("compare2").selectedIndex=1;
+}
+function comparePhones(){
+ const a=phones.find(p=>p.id===Number(document.getElementById("compare1").value));
+ const b=phones.find(p=>p.id===Number(document.getElementById("compare2").value));
+ if(!a||!b)return;
+ document.getElementById("compareResult").innerHTML=`
+  <p><strong>${a.name}</strong> — ${money(a.price)} · ${a.ram} RAM · ${a.storage}</p>
+  <p><strong>${b.name}</strong> — ${money(b.price)} · ${b.ram} RAM · ${b.storage}</p>
+  <p>Price difference: <strong>${money(Math.abs(a.price-b.price))}</strong></p>
+  <p>${a.price===b.price?"Both have the same listed price.":a.price<b.price?a.name+" has the lower listed price.":b.name+" has the lower listed price."}</p>
+ `;
+}
+searchInput.addEventListener("input",renderPhones);
+brandSelect.addEventListener("change",renderPhones);
+budgetSelect.addEventListener("change",renderPhones);
+document.getElementById("year").textContent=new Date().getFullYear();
+renderPhones();
+setupCompare();
 </script>
 </body>
 </html>
