@@ -85,5 +85,118 @@ alert(p.name+"\nPrice: "+money(p.price)+"\n"+p.ram+"\n"+p.camera+"\n\nDemo detai
 }
 setupLanes();render();
 </script>
+  
+<style>
+.mobile-details {
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  overflow-y:auto;
+  background:#100d15;
+  color:#fff;
+  padding:18px;
+  font-family:Arial,sans-serif;
+}
+.mobile-details h2 {color:#e0baff}
+.mobile-details .close {
+  background:#362343;color:white;border:0;
+  border-radius:8px;padding:12px 18px;
+  font-size:16px;margin-bottom:15px;
+}
+.phone-photos {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+.phone-photos img {
+  width:100%;
+  aspect-ratio:3/5;
+  object-fit:contain;
+  background:#21182a;
+  border-radius:12px;
+}
+.specs {
+  width:100%;
+  border-collapse:collapse;
+  margin-top:15px;
+}
+.specs td {
+  padding:12px 8px;
+  border-bottom:1px solid #45344f;
+  overflow-wrap:anywhere;
+}
+.specs td:first-child {color:#d4a8fa}
+</style>
+
+<div id="mobileDetails" class="mobile-details">
+  <button class="close" onclick="closeMobileDetails()">← Back to phones</button>
+  <h2 id="detailName">Mobile name</h2>
+  <h3 id="detailPrice"></h3>
+
+  <div class="phone-photos">
+    <div>
+      <img id="frontPhoto" alt="Phone front view">
+      <p>Front View</p>
+    </div>
+    <div>
+      <img id="backPhoto" alt="Phone back view">
+      <p>Back View</p>
+    </div>
+  </div>
+
+  <h2>Full Specifications</h2>
+  <table class="specs" id="detailSpecs"></table>
+  <p style="color:#c8b9d3;font-size:12px">
+    Prices and specifications may vary by variant and retailer.
+  </p>
+</div>
+
+<script>
+const toyoPhoneDetails = {
+  "Infinix Note 50": {
+    price: "Verify current Pakistan price",
+    front: "https://placehold.co/400x650/241832/ffffff?text=Front+Photo",
+    back: "https://placehold.co/400x650/241832/ffffff?text=Back+Photo",
+    specs: {
+      "Brand": "Infinix",
+      "Display": "Check exact variant",
+      "RAM": "Check variant",
+      "Storage": "Check variant",
+      "Processor": "Verify official specification",
+      "Rear Camera": "Verify official specification",
+      "Front Camera": "Verify official specification",
+      "Battery": "Verify official specification",
+      "Charging": "Verify official specification",
+      "Network": "Verify regional variant",
+      "Operating System": "Verify current version"
+    }
+  }
+};
+
+function openMobileDetails(name) {
+  const p = toyoPhoneDetails[name];
+  if (!p) {
+    alert("Details abhi add nahi huin: " + name);
+    return;
+  }
+
+  document.getElementById("detailName").textContent = name;
+  document.getElementById("detailPrice").textContent = p.price;
+  document.getElementById("frontPhoto").src = p.front;
+  document.getElementById("backPhoto").src = p.back;
+
+  document.getElementById("detailSpecs").innerHTML =
+    Object.entries(p.specs).map(([k,v]) =>
+      `<tr><td>${k}</td><td>${v}</td></tr>`
+    ).join("");
+
+  document.getElementById("mobileDetails").style.display = "block";
+}
+
+function closeMobileDetails() {
+  document.getElementById("mobileDetails").style.display = "none";
+}
+</script>
 </body>
 </html>
