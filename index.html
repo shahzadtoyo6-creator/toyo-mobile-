@@ -34,7 +34,6 @@ input,select{width:100%;padding:12px;background:#171321;border:1px solid var(--l
 .card:hover{border-color:var(--rain);transform:translateY(-2px)}
 .art{height:165px;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse,#39234b,#171321 75%);padding:8px}
 .art img{width:100%;height:100%;object-fit:contain}
-.image-fallback{font-size:45px;color:var(--rain)}
 .card-body{padding:10px}
 .card h3{font-size:14px;line-height:1.4;margin:0 0 6px}
 .price{font-size:17px;font-weight:bold;color:var(--rain);margin:8px 0}
@@ -65,10 +64,6 @@ footer{text-align:center;padding:22px 8px;border-top:1px solid var(--line);font-
 .filters{grid-template-columns:1fr}
 .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
 .art{height:125px}
-.card-body{padding:8px}
-.card h3{font-size:12px}
-.price{font-size:15px}
-.heading{font-size:16px}
 }
 </style>
 </head>
@@ -80,39 +75,23 @@ footer{text-align:center;padding:22px 8px;border-top:1px solid var(--line);font-
 <div class="container layout">
 <aside class="sidebar">
 <h3>BRANDS</h3>
-<button class="brand-btn active" onclick="chooseBrand('')">ALL PHONES</button>
-<button class="brand-btn" onclick="chooseBrand('Infinix')">INFINIX</button>
-<button class="brand-btn" onclick="chooseBrand('OPPO')">OPPO</button>
-<button class="brand-btn" onclick="chooseBrand('Samsung')">SAMSUNG</button>
-<button class="brand-btn" onclick="chooseBrand('Vivo')">VIVO</button>
-<button class="brand-btn" onclick="chooseBrand('Tecno')">TECNO</button>
-<button class="brand-btn" onclick="chooseBrand('Redmi')">REDMI</button>
-<button class="brand-btn" onclick="chooseBrand('Realme')">REALME</button>
+<button class="brand-btn active" data-brand="" onclick="chooseBrand('')">ALL PHONES</button>
+<button class="brand-btn" data-brand="Infinix" onclick="chooseBrand('Infinix')">INFINIX</button>
+<button class="brand-btn" data-brand="OPPO" onclick="chooseBrand('OPPO')">OPPO</button>
+<button class="brand-btn" data-brand="Samsung" onclick="chooseBrand('Samsung')">SAMSUNG</button>
+<button class="brand-btn" data-brand="Vivo" onclick="chooseBrand('Vivo')">VIVO</button>
+<button class="brand-btn" data-brand="Tecno" onclick="chooseBrand('Tecno')">TECNO</button>
+<button class="brand-btn" data-brand="Redmi" onclick="chooseBrand('Redmi')">REDMI</button>
+<button class="brand-btn" data-brand="Realme" onclick="chooseBrand('Realme')">REALME</button>
 </aside>
 <main class="main">
 <div class="heading" id="heading">LATEST MOBILE PHONES</div>
 <div class="filters">
-<input id="search" placeholder="Search mobile..." type="search">
-<select id="brand" aria-label="Brand">
-<option value="">All Brands</option>
-<option>Infinix</option><option>OPPO</option><option>Samsung</option>
-<option>Vivo</option><option>Tecno</option><option>Redmi</option><option>Realme</option>
-</select>
-<select id="budget" aria-label="Budget">
-<option value="">All Prices</option>
-<option value="30000">Under 30,000</option>
-<option value="40000">Under 40,000</option>
-<option value="50000">Under 50,000</option>
-<option value="60000">Under 60,000</option>
-<option value="80000">Under 80,000</option>
-<option value="100000">Under 100,000</option>
-<option value="150000">Under 150,000</option>
-</select>
+<input id="search" placeholder="Search mobile..." type="search" oninput="renderPhones()">
+<select id="brand" onchange="renderPhones()"><option value="">All Brands</option><option>Infinix</option><option>OPPO</option><option>Samsung</option><option>Vivo</option><option>Tecno</option><option>Redmi</option><option>Realme</option></select>
+<select id="budget" onchange="renderPhones()"><option value="">All Prices</option><option value="30000">Under 30,000</option><option value="40000">Under 40,000</option><option value="50000">Under 50,000</option><option value="60000">Under 60,000</option><option value="80000">Under 80,000</option><option value="100000">Under 100,000</option><option value="150000">Under 150,000</option></select>
 </div>
-<div class="section-title">
-<h2 id="listTitle">All Mobiles</h2>
-<span class="small" id="count"></span>
-</div>
+<div class="section-title"><h2 id="listTitle">All Mobiles</h2><span class="small" id="count"></span></div>
 <div class="grid" id="phoneGrid"></div>
 <div class="empty" id="empty">No mobile found. Change your search.</div>
 <section class="compare">
@@ -125,20 +104,111 @@ footer{text-align:center;padding:22px 8px;border-top:1px solid var(--line);font-
 </section>
 </main>
 </div>
-<footer>
-<strong>TOYO MOBILE</strong><br>
-Prices are estimates and can vary by shop, variant and city.<br>
-Confirm specifications and warranty with the seller before purchase.
-</footer>
+<footer><strong>TOYO MOBILE</strong><br>Prices are estimates and can vary by shop, variant and city.<br>Confirm specifications and warranty with the seller before purchase.</footer>
 <div class="modal" id="modal" onclick="outsideClose(event)">
 <div class="modal-box">
 <div class="modal-head"><h2 id="dName"></h2><button class="close" onclick="closeDetails()">×</button></div>
-<div class="modal-body">
-<div id="dArt"></div>
-<div class="price" id="dPrice"></div>
-<table id="dTable"></table>
-<div class="note">Phone images load from external image links when available. Prices and specifications may vary by variant and region.</div>
-</div>
+<div class="modal-body"><div id="dArt"></div><div class="price" id="dPrice"></div><table id="dTable"></table><div class="note">Phone images load from external image links when available. Prices and specifications may vary by variant and region.</div></div>
 </div>
 </div>
 <script>
+const phones = [
+  {name:"Infinix Note 50",brand:"Infinix",price:74999,ram:"8GB RAM · 256GB",display:"6.78-inch AMOLED, 144Hz",battery:"5000mAh",camera:"50MP",processor:"Helio G99",image:""},
+  {name:"Infinix Hot 50",brand:"Infinix",price:39999,ram:"8GB RAM · 128GB",display:"6.78-inch FHD+ LCD, 120Hz",battery:"5000mAh",camera:"50MP",processor:"Helio G99",image:""},
+  {name:"Samsung Galaxy A15",brand:"Samsung",price:54499,ram:"8GB RAM · 256GB",display:"6.5-inch Super AMOLED, 90Hz",battery:"5000mAh",camera:"50MP",processor:"Helio G99",image:""},
+  {name:"Vivo Y28",brand:"Vivo",price:45999,ram:"8GB RAM · 128GB",display:"6.68-inch LCD, 90Hz",battery:"6000mAh",camera:"50MP",processor:"Helio G85",image:""},
+  {name:"Tecno Spark 20",brand:"Tecno",price:34999,ram:"8GB RAM · 256GB",display:"6.56-inch LCD, 90Hz",battery:"5000mAh",camera:"50MP",processor:"Helio G85",image:""},
+  {name:"Redmi Note 13",brand:"Redmi",price:59999,ram:"8GB RAM · 256GB",display:"6.67-inch AMOLED, 120Hz",battery:"5000mAh",camera:"108MP",processor:"Snapdragon 685",image:""},
+  {name:"Realme C67",brand:"Realme",price:49999,ram:"8GB RAM · 128GB",display:"6.72-inch LCD, 90Hz",battery:"5000mAh",camera:"108MP",processor:"Snapdragon 685",image:""},
+  {name:"OPPO A78",brand:"OPPO",price:62999,ram:"8GB RAM · 256GB",display:"6.43-inch AMOLED, 90Hz",battery:"5000mAh",camera:"50MP",processor:"Snapdragon 680",image:""}
+];
+
+const grid = document.getElementById('phoneGrid');
+const count = document.getElementById('count');
+const empty = document.getElementById('empty');
+const c1 = document.getElementById('compare1');
+const c2 = document.getElementById('compare2');
+
+function renderPhones(){
+  const q = document.getElementById('search').value.toLowerCase();
+  const b = document.getElementById('brand').value.toLowerCase();
+  const budget = document.getElementById('budget').value;
+  let filtered = phones.filter(p => {
+    let ok = p.name.toLowerCase().includes(q);
+    if(b) ok = ok && p.brand.toLowerCase() === b;
+    if(budget) ok = ok && p.price <= parseInt(budget);
+    return ok;
+  });
+  grid.innerHTML = '';
+  if(filtered.length===0){ empty.style.display='block'; count.textContent='0 phones'; return; }
+  empty.style.display='none';
+  count.textContent = filtered.length + ' phones';
+  filtered.forEach((p,i)=>{
+    let realIndex = phones.indexOf(p);
+    grid.innerHTML += `
+    <div class="card" onclick="openDetails(${realIndex})">
+      <div class="art">${p.image ? `<img src="${p.image}" onerror="this.outerHTML='<div class=image-fallback>📱</div>'">` : `<div class="image-fallback">📱</div>`}</div>
+      <div class="card-body">
+        <h3>${p.name}</h3>
+        <div class="small">${p.brand}</div>
+        <div class="price">Rs. ${p.price.toLocaleString()}</div>
+        <div class="spec">${p.ram}<br>${p.display}</div>
+        <button class="btn view">FULL DETAILS</button>
+      </div>
+    </div>`;
+  });
+}
+
+function chooseBrand(brand){
+  document.getElementById('brand').value = brand;
+  document.querySelectorAll('.brand-btn').forEach(btn=>btn.classList.remove('active'));
+  let activeBtn = document.querySelector(`.brand-btn[data-brand="${brand}"]`);
+  if(activeBtn) activeBtn.classList.add('active');
+  renderPhones();
+  document.getElementById('listTitle').textContent = brand ? brand + ' Mobiles' : 'All Mobiles';
+}
+
+function fillCompare(){
+  c1.innerHTML = '<option value="">Select Phone 1</option>';
+  c2.innerHTML = '<option value="">Select Phone 2</option>';
+  phones.forEach((p,i)=>{
+    c1.innerHTML += `<option value="${i}">${p.name}</option>`;
+    c2.innerHTML += `<option value="${i}">${p.name}</option>`;
+  });
+}
+function comparePhones(){
+  if(c1.value==='' || c2.value===''){ document.getElementById('compareResult').innerHTML='Please select two phones.'; return; }
+  if(c1.value===c2.value){ document.getElementById('compareResult').innerHTML='Select two different phones.'; return; }
+  let p1 = phones[c1.value]; let p2 = phones[c2.value];
+  document.getElementById('compareResult').innerHTML = `
+  <table>
+  <tr><td>Model</td><td><b>${p1.name}</b> vs <b>${p2.name}</b></td></tr>
+  <tr><td>Price</td><td>Rs. ${p1.price.toLocaleString()} vs Rs. ${p2.price.toLocaleString()}</td></tr>
+  <tr><td>RAM/Storage</td><td>${p1.ram} vs ${p2.ram}</td></tr>
+  <tr><td>Display</td><td>${p1.display} vs ${p2.display}</td></tr>
+  <tr><td>Battery</td><td>${p1.battery} vs ${p2.battery}</td></tr>
+  <tr><td>Camera</td><td>${p1.camera} vs ${p2.camera}</td></tr>
+  </table>`;
+}
+function openDetails(i){
+  let p = phones[i];
+  document.getElementById('dName').textContent = p.name;
+  document.getElementById('dArt').innerHTML = `<div class="art">${p.image ? `<img src="${p.image}">` : `<div class="image-fallback">📱</div>`}</div>`;
+  document.getElementById('dPrice').textContent = 'Rs. ' + p.price.toLocaleString();
+  document.getElementById('dTable').innerHTML = `
+  <tr><td>Brand</td><td>${p.brand}</td></tr>
+  <tr><td>RAM / Storage</td><td>${p.ram}</td></tr>
+  <tr><td>Display</td><td>${p.display}</td></tr>
+  <tr><td>Battery</td><td>${p.battery}</td></tr>
+  <tr><td>Camera</td><td>${p.camera}</td></tr>
+  <tr><td>Processor</td><td>${p.processor}</td></tr>`;
+  document.getElementById('modal').style.display='block';
+}
+function closeDetails(){ document.getElementById('modal').style.display='none'; }
+function outsideClose(e){ if(e.target.id==='modal') closeDetails(); }
+
+fillCompare();
+renderPhones();
+</script>
+</body>
+  </html>
