@@ -112,19 +112,27 @@ footer{text-align:center;padding:22px 8px;border-top:1px solid var(--line);font-
 </div>
 </div>
 <script>
-/* "img" = GSMArena image ka naam. Agar wo na chale to
-   images/<img> (apna folder) try hoga, phir phone icon. */
+/* Har phone ki "img" line us phone ki GSMArena image ka naam hai.
+   Agar wo na chale to images/<naam> try hoga, phir phone icon. */
 const GS = 'https://fdn2.gsmarena.com/vv/bigpic/';
 
 const phones = [
-  {name:"Infinix Note 50",brand:"Infinix",price:74999,ram:"8GB RAM · 256GB",display:"6.78-inch AMOLED, 144Hz",battery:"5000mAh",camera:"50MP",front:"32MP",processor:"Helio G99",charging:"45W",os:"Android 15",network:"4G",sim:"Dual SIM",colors:"Black, Blue, Green",release:"2025",weight:"195g",img:"infinix-note-50.jpg"},
-  {name:"Infinix Hot 50",brand:"Infinix",price:39999,ram:"8GB RAM · 128GB",display:"6.78-inch FHD+ LCD, 120Hz",battery:"5000mAh",camera:"50MP",front:"8MP",processor:"Helio G99",charging:"18W",os:"Android 14",network:"4G",sim:"Dual SIM",colors:"Black, Green, Blue",release:"2024",weight:"199g",img:"infinix-hot-50.jpg"},
-  {name:"Samsung Galaxy A15",brand:"Samsung",price:54499,ram:"8GB RAM · 256GB",display:"6.5-inch Super AMOLED, 90Hz",battery:"5000mAh",camera:"50MP",front:"13MP",processor:"Helio G99",charging:"25W",os:"Android 14",network:"4G",sim:"Dual SIM",colors:"Black, Blue, Light Blue",release:"2023",weight:"200g",img:"samsung-galaxy-a15.jpg"},
-  {name:"Vivo Y28",brand:"Vivo",price:45999,ram:"8GB RAM · 128GB",display:"6.68-inch LCD, 90Hz",battery:"6000mAh",camera:"50MP",front:"8MP",processor:"Helio G85",charging:"44W",os:"Android 14",network:"4G",sim:"Dual SIM",colors:"Black, Green",release:"2024",weight:"199g",img:"vivo-y28.jpg"},
-  {name:"Tecno Spark 20",brand:"Tecno",price:34999,ram:"8GB RAM · 256GB",display:"6.56-inch LCD, 90Hz",battery:"5000mAh",camera:"50MP",front:"32MP",processor:"Helio G85",charging:"18W",os:"Android 13",network:"4G",sim:"Dual SIM",colors:"Black, Green, Blue",release:"2024",weight:"188g",img:"tecno-spark-20.jpg"},
-  {name:"Redmi Note 13",brand:"Redmi",price:59999,ram:"8GB RAM · 256GB",display:"6.67-inch AMOLED, 120Hz",battery:"5000mAh",camera:"108MP",front:"16MP",processor:"Snapdragon 685",charging:"33W",os:"Android 13",network:"4G",sim:"Dual SIM",colors:"Black, Blue, Gold",release:"2024",weight:"188g",img:"xiaomi-redmi-note-13.jpg"},
-  {name:"Realme C67",brand:"Realme",price:49999,ram:"8GB RAM · 128GB",display:"6.72-inch LCD, 90Hz",battery:"5000mAh",camera:"108MP",front:"8MP",processor:"Snapdragon 685",charging:"33W",os:"Android 13",network:"4G",sim:"Dual SIM",colors:"Green, Black",release:"2023",weight:"190g",img:"realme-c67.jpg"},
-  {name:"OPPO A78",brand:"OPPO",price:62999,ram:"8GB RAM · 256GB",display:"6.43-inch AMOLED, 90Hz",battery:"5000mAh",camera:"50MP",front:"8MP",processor:"Snapdragon 680",charging:"33W",os:"Android 13",network:"4G",sim:"Dual SIM",colors:"Black, Blue",release:"2023",weight:"180g",img:"oppo-a78.jpg"}
+  {name:"Infinix Note 50",brand:"Infinix",price:74999,ram:"8GB RAM · 256GB",display:"6.78-inch AMOLED, 144Hz",battery:"5000mAh",camera:"50MP",front:"32MP",processor:"Helio G99",charging:"45W",os:"Android 15",network:"4G",sim:"Dual SIM",colors:"Black, Blue, Green",release:"2025",weight:"195g",
+   img:"infinix-note-50.jpg"},
+  {name:"Infinix Hot 50",brand:"Infinix",price:39999,ram:"8GB RAM · 128GB",display:"6.78-inch FHD+ LCD, 120Hz",battery:"5000mAh",camera:"50MP",front:"8MP",processor:"Helio G99",charging:"18W",os:"Android 14",network:"4G",sim:"Dual SIM",colors:"Black, Green, Blue",release:"2024",weight:"199g",
+   img:"infinix-hot-50.jpg"},
+  {name:"Samsung Galaxy A15",brand:"Samsung",price:54499,ram:"8GB RAM · 256GB",display:"6.5-inch Super AMOLED, 90Hz",battery:"5000mAh",camera:"50MP",front:"13MP",processor:"Helio G99",charging:"25W",os:"Android 14",network:"4G",sim:"Dual SIM",colors:"Black, Blue, Light Blue",release:"2023",weight:"200g",
+   img:"samsung-galaxy-a15-lte-.jpg"},
+  {name:"Vivo Y28",brand:"Vivo",price:45999,ram:"8GB RAM · 128GB",display:"6.68-inch LCD, 90Hz",battery:"6000mAh",camera:"50MP",front:"8MP",processor:"Helio G85",charging:"44W",os:"Android 14",network:"4G",sim:"Dual SIM",colors:"Black, Green",release:"2024",weight:"199g",
+   img:"vivo-y28-4g.jpg"},
+  {name:"Tecno Spark 20",brand:"Tecno",price:34999,ram:"8GB RAM · 256GB",display:"6.56-inch LCD, 90Hz",battery:"5000mAh",camera:"50MP",front:"32MP",processor:"Helio G85",charging:"18W",os:"Android 13",network:"4G",sim:"Dual SIM",colors:"Black, Green, Blue",release:"2024",weight:"188g",
+   img:"tecno-spark-20.jpg"},
+  {name:"Redmi Note 13",brand:"Redmi",price:59999,ram:"8GB RAM · 256GB",display:"6.67-inch AMOLED, 120Hz",battery:"5000mAh",camera:"108MP",front:"16MP",processor:"Snapdragon 685",charging:"33W",os:"Android 13",network:"4G",sim:"Dual SIM",colors:"Black, Blue, Gold",release:"2024",weight:"188g",
+   img:"xiaomi-redmi-note-13.jpg"},
+  {name:"Realme C67",brand:"Realme",price:49999,ram:"8GB RAM · 128GB",display:"6.72-inch LCD, 90Hz",battery:"5000mAh",camera:"108MP",front:"8MP",processor:"Snapdragon 685",charging:"33W",os:"Android 13",network:"4G",sim:"Dual SIM",colors:"Green, Black",release:"2023",weight:"190g",
+   img:"realme-c67.jpg"},
+  {name:"OPPO A78",brand:"OPPO",price:62999,ram:"8GB RAM · 256GB",display:"6.43-inch AMOLED, 90Hz",battery:"5000mAh",camera:"50MP",front:"8MP",processor:"Snapdragon 680",charging:"33W",os:"Android 13",network:"4G",sim:"Dual SIM",colors:"Black, Blue",release:"2023",weight:"180g",
+   img:"oppo-a78.jpg"}
 ];
 
 const FALLBACK = 'data:image/svg+xml;utf8,' + encodeURIComponent(
@@ -249,4 +257,4 @@ fillCompare();
 renderPhones();
 </script>
 </body>
-   </html>
+</html>
