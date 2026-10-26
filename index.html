@@ -254,12 +254,15 @@ function closeDetails(){ document.getElementById('modal').style.display='none'; 
 function outsideClose(e){ if(e.target.id==='modal') closeDetails(); }
 
 fillCompare();
+
 const FIX = {
   "infinix-hot-50.jpg":"infinix-hot-50-4g.jpg",
+  "infinix-note-50.jpg":"infinix-note50.jpg",
   "realme-c67.jpg":"realme-c67-lte.jpg",
   "oppo-a78.jpg":"oppo-a78-4g.jpg"
 };
 phones.forEach(p => { if(FIX[p.img]) p.img = FIX[p.img]; });
+
 renderPhones();
 </script>
 </body>
